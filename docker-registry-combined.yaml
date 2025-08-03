@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: docker-registry
-          image: registry:2
+          image: distribution/distribution:3
           ports:
             - containerPort: 5000 # Default port
           env:
@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: docker-registry
+  name: docker-registry-service
 spec:
   selector:
     app: docker-registry
@@ -33,3 +33,33 @@ spec:
       port: 5000
       targetPort: 5000
   type: ClusterIP # Or NodePort/LoadBalancer if external access is needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-registry-service-load-balancer
+spec:
+  selector:
+    app: docker-registry
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: docker-registry-ingress
+spec:
+  rules:
+    - host: docker-registry
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: docker-registry-service # Refers to your Service
+                port:
+                  number: 5000

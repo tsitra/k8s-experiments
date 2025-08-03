@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: eureka-server
-        image: eureka:local
+        image: 192.168.1.110:5000/eureka:local
         ports:
         - containerPort: 8761 # Default Eureka port
         env:
@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: eureka-server
+  name: eureka-server-service
 spec:
   selector:
     app: eureka-server
