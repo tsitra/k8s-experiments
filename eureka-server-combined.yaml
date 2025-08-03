@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: eureka-server
-        image: 192.168.1.110:5000/eureka:local
+        image: localhost:5000/eureka:local
         ports:
         - containerPort: 8761 # Default Eureka port
         env:

@@ -2,6 +2,7 @@
 **/*/target/
 
 **/*/.mvn/wrapper/maven-wrapper.jar
+*.tar
 
 ### STS ###
 .apt_generated
