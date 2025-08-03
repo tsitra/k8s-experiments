@@ -1,0 +1,26 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: kafka
+spec:
+  kafka:
+    version: 3.3.1 # Or desired Kafka version
+    replicas: 1
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+    storage:
+      type: persistent-claim
+      size: 100Gi # Adjust size as needed
+      deleteClaim: false
+  zookeeper:
+    replicas: 1
+    storage:
+      type: persistent-claim
+      size: 10Gi # Adjust size as needed
+      deleteClaim: false
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}

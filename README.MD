@@ -10,6 +10,7 @@ This project attempts to host a semi-production like environment for some rather
 * Setup minikube locally
 * Setup kubectl locally
 * Setup minikube dashboard
+* Setup helm locally
 ## Setup
 * Eureka (eureka-server-build)
 * Kafka (ph)
